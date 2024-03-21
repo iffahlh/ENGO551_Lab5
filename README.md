@@ -10,5 +10,7 @@ This website was built with HTML and Javascript. The following tools, libraries 
 
 ## Project Files
 **map.html** - HTML file defining the layout of the site and functionality for user inputs
+
 **map.js** - JS file for creating the map and displaying the location marker based on the received GeoJson message containing the user's location over topic engo_551/iffah_hamdan/my_temperature
+
 **websocket.js** - JS file for handling user inputs and websocket functionality
