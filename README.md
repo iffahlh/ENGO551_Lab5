@@ -9,7 +9,7 @@ This website was built with HTML and Javascript. The following tools, libraries 
 - **[Bootstrap 5](https://github.com/twbs/bootstrap)** to create the grid layout of the HTML page and styles for user input
 
 ## Project Files
-**map.html** - HTML file defining the layout of the site and functionality for user inputs
+**index.html** - HTML file defining the layout of the site and functionality for user inputs
 
 **map.js** - JS file for creating the map and displaying the location marker based on the received GeoJson message containing the user's location over topic engo_551/iffah_hamdan/my_temperature
 
