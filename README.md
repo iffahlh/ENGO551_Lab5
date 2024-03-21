@@ -1,7 +1,7 @@
 # ENGO551_Lab5
 This is a simple web application that uses Leaflet, JavaScript geolocation API and MQTT over WebSockets protocol to transform a smartphone user using this application as an IoT sensor to visualize their location on a map. Users can enter an MQTT message broker host and port to connect to, and once connected, they can send a topic and message to listeners subscribed on the same topic. Users can also share their location and a random generated temperature value to listeners subscribed to topic engo_551/iffah_hamdan/my_temperature, and then display this information on the map.
 
-The video demo for this project can be found [here](https://www.youtube.com/watch?v=XymryKKfXi4)
+The video demo for this project can be found [here](https://youtu.be/jQm1gwX7hsc)
 
 This website was built with HTML and Javascript. The following tools, libraries and plugins were used in development:
 - **[Leaflet.js](https://github.com/Leaflet/Leaflet)** for creating the interactive map
