@@ -9,18 +9,20 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 
 // displaying data received from api response on the map
-function displayTempMarker(msg){
-    data=JSON.parse(msg.payloadString);
+function displayTempMarker(msgStr){
+    data=JSON.parse(msgStr)
     map.removeLayer(marker);
     marker=L.geoJSON(data, {pointToLayer: function(feature, latlng) {
         let temp=feature.properties.temperature;
-        if (temp >= -40 && temp < 10){ return L.circleMarker(latlng, {radius: 8, fillColor: "blue"});}
+        if (temp >= -40 && temp < 10) { return L.circleMarker(latlng, {radius: 8, fillColor: "blue"});}
         else if (temp >= 10 && temp < 30) { return L.circleMarker(latlng,  {radius: 8, fillColor: "green"});}
         else if (temp >= 30 && temp <= 60) {return L.circleMarker(latlng,  {radius: 8, fillColor: "red"});}
 }
-    }).addTo(map);
+    })
+    .bindPopup(`Current Temperature: ${temp} deg Celsius`)
+    .addTo(map);
 
-    marker.setContent(`Current Temperature: ${temp}`)
+    marker.openPopup()
 }
 
 

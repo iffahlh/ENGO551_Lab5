@@ -30,9 +30,9 @@ function posSuccess(pos) {
     };
 
     let msg=JSON.stringify(geojsonFeature);
-    sendMessage(topic, msg)
     mqtt.subscribe(topic)
-
+    sendMessage(topic, msg)
+    statusUpdate("shareStatus","Sent Status!","text-success")
 }
 
 function posError(err) {
@@ -67,7 +67,7 @@ function MQTTconnect() {
         onSuccess: onConnect,
         onFailure: onFailure
         }; 
-    mqtt.onMessageArrived=displayTempMarker;
+    mqtt.onMessageArrived=onMessageArrived;
     mqtt.onMessageDelivered=onMessageDelivered;
     mqtt.connect(options); //connect
 }
@@ -77,10 +77,27 @@ function onFailure() {
     setTimeout(MQTTconnect, reconnectTimeout);
 }
 
+function onConnectionLost(code, msg) {
+    statusUpdate('status', `Connection Lost. Error Code: ${code}, Message: ${msg}`,'text-danger')
+    document.getElementById('host').removeAttribute("disabled");
+    document.getElementById('port').removeAttribute("disabled");
+    document.getElementById('host').value=host;
+    document.getElementById('port').value=port
+    document.getElementById('host').setAttribute("placeholder", "e.g. test.mosquitto.org");
+    document.getElementById('port').setAttribute("placeholder", "e.g. 8080");
+    document.getElementById('message').setAttribute("hidden", "hidden");
+    statusUpdate('msgStatus', "",'text-danger')
+    e.target.innerHTML="Connect";
+    host=null;
+    port=null;
+}
+
 function onMessageArrived(msg){
     out_msg="Message received "+msg.payloadString+"<br>";
-    out_msg=out_msg+"Message received Topic "+msg.destinationName;
-    console.log(out_msg);
+	out_msg=out_msg+"Message received Topic "+msg.destinationName;
+	console.log(out_msg);
+    displayTempMarker(msg.payloadString)
+  
 }
 
 function onMessageDelivered(){
@@ -91,6 +108,7 @@ function onMessageDelivered(){
 function sendMessage(topic, msg){
     let message = new Paho.MQTT.Message(msg);
     message.destinationName = topic;
+    message.retained=true;
     mqtt.send(message);
 }
 
@@ -135,6 +153,9 @@ document.getElementById('connect').addEventListener('click', (e) => {
         document.getElementById('message').setAttribute("hidden", "hidden");
         statusUpdate('status', "",'text-danger')
         statusUpdate('msgStatus', "",'text-danger')
+        statusUpdate('shareStatus', "",'text-danger')
+        document.getElementById('topic').value="";
+        document.getElementById('msg').value="";
         e.target.innerHTML="Connect";
         host=null;
         port=null;

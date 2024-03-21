@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Calgary Building Permits</title> 
+    <title>Lab 5 - Websockets</title> 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -40,7 +40,7 @@
         </div>
         <div class="col-2">
             <!--- Side panel containing user options-->
-            <h5> MQTT </h5>
+            <h5> Connect To MQTT Over WebSockets </h5>
             <p id="status" class="text-danger text-success"></p>
             <div class="form-group">
                 Host<br>
@@ -48,18 +48,26 @@
                 Port <br>
                 <input type="number" class="form-control" id="port" placeholder="e.g. 8080" value=0>
                 <button id="connect" type="button" class="btn btn-primary">Connect</button>
-                <br>
-                <br>
+            </div>
+            <br>
+            <br>
+            
+            <div id="message" class="form-group" hidden>
+                <h5> Share Status </h5>
+                <p id="shareStatus" class="text-danger text-success"></p>
                 <button id="share" type="button" class="btn btn-primary" hidden>Share My Status</button>
+                <br>
+                <h5> Send a Message</h5>
+                <p id="msgStatus" class="text-danger text-success"></p>
+                Topic
+                <input type="text" class="form-control" id="topic" placeholder="Your Topic" value="">
+                Message
+                <input type="text" class="form-control" id="msg" placeholder="Your Message" value="">
+                <button id="submitMessage" type="button" class="btn btn-primary click">Send Message</button>
             </div>
         </div>
 
-        <div id="message" class="form-group" hidden>
-            <p id="msgStatus" class="text-danger text-success"></p>
-            <input type="text" class="form-control" id="topic" placeholder="Your Topic" value="">
-            <input type="text" class="form-control" id="msg" placeholder="Your Message" value="">
-            <button id="submitMessage" type="button" class="btn btn-primary click">Send Message</button>
-        </div>
+        
 
     </div>
     
